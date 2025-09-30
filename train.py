@@ -146,8 +146,10 @@ def main():
         dataloader_pin_memory=True,
         report_to="none",
         seed=t["seed"],
-        evaluation_strategy="steps" if eval_ds is not None else "no",
-        eval_steps=t["eval_steps"] if eval_ds is not None else None,
+        remove_unused_columns=False,
+        # evaluation_strategy="steps" if eval_ds is not None else "no",
+
+        # eval_steps=t["eval_steps"] if eval_ds is not None else None,
     )
 
     trainer = Trainer(
@@ -160,6 +162,9 @@ def main():
     )
 
     trainer.train()
+    if eval_ds is not None:
+        print("Running final evaluation...")
+        print(trainer.evaluate())
 
     # Save LoRA adapter + tokenizer
     ckpt_dir = os.path.join(output_dir, "checkpoint")
