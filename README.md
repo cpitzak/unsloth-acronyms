@@ -7,7 +7,7 @@ Add `VLLM_SUPPORTED_VLM=[]` at the top of the file
 
 # Inference:
 ```
-python scripts/infer.py \
+python infer.py \
   --model_name unsloth/gemma-2-9b-bnb-4bit \
   --adapter outputs/gemma2-9b-acronyms/checkpoint \
   --prompt "What does SJL stand for?"
